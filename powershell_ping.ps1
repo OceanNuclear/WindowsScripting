@@ -13,7 +13,7 @@ $pingprog =
 {
 	$reply = $ping.Send('8.8.8.8')
 	$thisPing = $reply.Status
-	echo $thisPing
+	
 	if ($lastPing -eq "Success" -And $thisPing -ne "Success")
 		{
 		$dur_start = $lastPingTime
@@ -28,6 +28,8 @@ $pingprog =
 		$time+"`t"+$duration>>$downfile
 		echo $duration
 		}
+	
+	echo $thisPing
 	if ($thisPing -eq "Success")
 		{
 		$time = Get-Date -UFormat "%T"
