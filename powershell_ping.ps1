@@ -14,13 +14,6 @@ $pingprog =
 	$reply = $ping.Send('8.8.8.8')
 	$thisPing = $reply.Status
 	echo $thisPing
-	if ($thisPing -eq "Success")
-		{
-		$time = Get-Date -UFormat "%T"
-		
-		$time+"`t"+$reply.RoundtripTime>>$outfile
-		echo $reply.RoundtripTime
-		}
 	if ($lastPing -eq "Success" -And $thisPing -ne "Success")
 		{
 		$dur_start = $lastPingTime
@@ -34,6 +27,13 @@ $pingprog =
 		
 		$time+"`t"+$duration>>$downfile
 		echo $duration
+		}
+	if ($thisPing -eq "Success")
+		{
+		$time = Get-Date -UFormat "%T"
+		
+		$time+"`t"+$reply.RoundtripTime>>$outfile
+		echo $reply.RoundtripTime
 		}
 		
 	$pingNumber = $pingNumber +1
