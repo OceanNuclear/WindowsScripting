@@ -1,7 +1,6 @@
-$outfile=Get-Date -UFormat "%y-%m-%d-%R"
-$outfile=$outfile -replace ":"
-$downfile=$outfile+"_downTime"+".txt"
-$outfile=$outfile+".txt"
+#$outfile=$outfile -replace ":"
+$downfile="downTime.txt"
+$outfile="pingTime.txt"
 
 $ping = new-object System.Net.NetworkInformation.Ping
 $pingNumber = 0
@@ -13,6 +12,8 @@ $pingprog =
 {
 	$reply = $ping.Send('8.8.8.8')
 	$thisPing = $reply.Status
+	$date=Get-Date -UFormat "%d-%m-%y"
+	$time = Get-Date -UFormat "%T"
 	
 	if ($lastPing -eq "Success" -And $thisPing -ne "Success")
 		{
@@ -23,16 +24,13 @@ $pingprog =
 		$dur_end = Get-Date -UFormat "%s"
 		$duration = $dur_end - $dur_start
 		
-		$time = Get-Date -UFormat "%T"
-		
-		$time+"`t"+$duration>>$downfile
+		$date+"`t"+$time+"`t"+$duration>>$downfile
 		echo $duration
 		}
 	
 	echo $thisPing
 	if ($thisPing -eq "Success")
 		{
-		$time = Get-Date -UFormat "%T"
 		
 		$time+"`t"+$reply.RoundtripTime>>$outfile
 		echo $reply.RoundtripTime
