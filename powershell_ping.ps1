@@ -15,6 +15,10 @@ $pingprog =
 	$date=Get-Date -UFormat "%d-%m-%y"
 	$time = Get-Date -UFormat "%T"
 	
+	if ($thisPing -ne "Success")
+		{
+		echo $thisPing
+		}	
 	if ($lastPing -eq "Success" -And $thisPing -ne "Success")
 		{
 		$dur_start = $lastPingTime
@@ -27,8 +31,7 @@ $pingprog =
 		$date+"`t"+$time+"`t"+$duration>>$downfile
 		echo $duration
 		}
-	
-	echo $thisPing
+
 	if ($thisPing -eq "Success")
 		{
 		
