@@ -1,6 +1,7 @@
 #$outfile=$outfile -replace ":"
 $downfile="downTime.txt"
 $outfile="pingTime.txt"
+$outfile2="pingTime2.txt"
 
 $ping = new-object System.Net.NetworkInformation.Ping
 $pingNumber = 0
@@ -12,13 +13,15 @@ $pingprog =
 {
 	$reply = $ping.Send('8.8.8.8')
 	$thisPing = $reply.Status
-	$date=Get-Date -UFormat "%d-%m-%y"
+	$date = Get-Date -UFormat "%d-%m-%y"
 	$time = Get-Date -UFormat "%T"
+	$hourMin = Get-Date -UFormat "%H:%M"
 	
 	if ($thisPing -ne "Success")
 		{
 		echo $thisPing
-		}	
+		}
+		
 	if ($lastPing -eq "Success" -And $thisPing -ne "Success")
 		{
 		$dur_start = $lastPingTime
@@ -34,8 +37,7 @@ $pingprog =
 
 	if ($thisPing -eq "Success")
 		{
-		
-		$time+"`t"+$reply.RoundtripTime>>$outfile
+		$date+"`t"+$time+"`t"+$hourMin+"`t"+$reply.RoundtripTime>>$outfile2
 		echo $reply.RoundtripTime
 		}
 		
