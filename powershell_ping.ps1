@@ -37,7 +37,8 @@ $pingprog =
 
 	if ($thisPing -eq "Success")
 		{
-		$date+"`t"+$time+"`t"+$hourMin+"`t"+$reply.RoundtripTime>>$outfile2
+		$inverse = 1000/$reply.RoundtripTime
+		$date+"`t"+$time+"`t"+$hourMin+"`t"+$reply.RoundtripTime+"`t"+$inverse>>$outfile2
 		echo $reply.RoundtripTime
 		}
 		
