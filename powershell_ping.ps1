@@ -7,6 +7,7 @@ $ping = new-object System.Net.NetworkInformation.Ping
 $pingNumber = 0
 
 $lastPingTime = Get-Date -UFormat "%s"
+$dur_start = $lastPingTime
 
 #make a subprogram here in order to loop:
 $pingprog =
